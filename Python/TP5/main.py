@@ -1,9 +1,22 @@
 print('1.1 Génération de tables de multiplication')
-with open("tablemultiplication.txt", "w") as file:
-  for i in range(2,31):
-    for j in range(1,11):
-      file.write("{}{} = {} |".format(j, i, i*j))
-    file.write("\n")
+def tableMulti(n):
+    # Fonction générant la table de multiplication par n (10 termes)
+    # La table sera renvoyée sous forme d'une chaîne de caractères :
+    i, ch = 0, ""
+    while i < 10:
+        i = i + 1
+        ch = ch + str(i) + "*" + str(n) + " = " + str(i * n) + " | "
+    return ch
+NomF = input("Nom du fichier à créer : ")
+fichier = open(NomF, 'w')
+# Génération des tables de 2 à 30 :
+table = 2
+while table < 31:
+    fichier.write(tableMulti(table) + '\n')
+    table = table + 1
+fichier.close()
+
+
 
 print('\n1.2 Recherche et affichage de la phrase la plus longue')
 plusLongue = max(open('tablemultiplication.txt'), key=len)
@@ -18,39 +31,50 @@ size = len(max(open('tablemultiplication.txt'), key=len))
 print("Elle contient {} caractères, la voici :".format(size))
 print(plusLongue)
 
+
+
 print('\n1.3 Recherche et affichage de la phrase la plus longue : variante')
-tab_sentance = []
-f = open("tablemultiplication.txt", "r")
-for x in f:
-    tab_sentance.append(str(f.readline()))
-longest_sentance = ""
-line_number = 0
-boucle = 0
+def nbMots(chaineCharactere):
+    return len(chaineCharactere.split())
 
-for tab in tab_sentance:
-    if(len(longest_sentance) < len(tab_sentance[boucle])):
-        longest_sentance = tab_sentance[boucle]
-        line_number = boucle + 1
-    boucle = boucle + 1
+def tailleChaine(chaineCharactere):
+    return len(chaineCharactere)
 
-print(f"La ligne la plus longue est la {line_number}eme")
-print(f"Elle contient {len(longest_sentance)} caractères, la voici :")
-print(longest_sentance)
+with open('tablemultiplication.txt','r') as f:
+    i = 0
+    numMots = 0
+    numLigne = 0
+    ligne = ""
+    for line in f:
+        print("Ligne n°:{}, longueur = {}, {} mots.".format(i,tailleChaine(line),nbMots(line)))
+        i = i + 1
+        if(numMots<nbMots(line)):
+            numMots = nbMots(line)
+            numLigne = i
+            ligne = line
+    print("La ligne la plus longue est la {}eme,".format(numLigne))
+    print("Elle contient {} mots, la voici :".format(numMots))
+    print(line)
 
-def nb_mots(chaine):
-    word = []
-    word_length = "" 
-    word_list = chaine.split()
-    most_long_word_line = 0
-    number_of_word = len(word_list)
-    for x in range(0, number_of_word):
-        word.append(str(chaine.split()[x]))
-        print(f'Ligne n°:{x+1}, longueur = {len(word[x])}, 1 mot.')
-        if (len(word_length) < len(word[x])):
-            word_length = word[x]
-            most_long_word_line = x+1   
-    print(f'La ligne la plus longue est la {most_long_word_line}eme,\nElle contient {len(word_length)} mots, la voici :\n{word_length}')
-    return number_of_word
 
-number_of_word = nb_mots(longest_sentance)
-print(f'La ligne ayant le plus de mots est la {line_number}eme,\nElle contient {number_of_word} mots, la voici :\n{longest_sentance}')
+
+print('\n1.4 Recherche et affichage de la phrase la plus longue : variante avec filter')
+# la fonction booléenne
+def hasSpace(x):
+    return(x==" ")
+# la nouvelle méthode sans boucle for ni while
+def nbMots (chaine):
+    listeEspaces = list(filter(hasSpace,chaine))
+    # décommenter pour voir la liste résultante
+    #print(listeEspaces)
+    nbSpaces = len(listeEspaces)
+    return nbSpaces+1
+
+
+
+print('\n1.5 Arrondi de nombres à virgule')
+with open('test.txt','r') as f:
+    for line in f:
+        nombre = float(line)
+        fichier = open('autre.txt','a')
+        fichier.writelines([str(round(nombre,0))+"\n"])
