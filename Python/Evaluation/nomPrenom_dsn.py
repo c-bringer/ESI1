@@ -117,8 +117,7 @@ class serveurDns:
 		if self.ipVerifFormat(adresseIp) == True:
 			if self.verifUrl(url) == True:
 				if not adresseIp in self.__resolDns.values():
-					#Remonte l'erreur suivante : ValueError: dictionary update sequence element #0 has length 14; 2 is required
-					self.__resolDns.update({url, adresseIp})
+					self.__resolDns[url] = adresseIp
 					return True
 				else:
 					print('existingIP')
