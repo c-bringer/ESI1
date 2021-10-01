@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}gestion des intervenants{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>Liste des intervenants</h1>
+        <ul>
+            {% for inter in intervenants %}
+                <li>{{ inter.nom }}, {{ inter.specialiteprofessionnelle }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

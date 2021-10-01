@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block title %}gestion des intervenants{% endblock %}
+
+{% block body %}
+<div>
+    <h1>La saissie a bien ete enregistre</h1>
+    <a href="{{ path('intervenant_create') }}">ajout d'un nouvel intervenant</a>
+    <a href="{{ path('intervenant_liste') }}">liste des intervenants</a>
+</div>
+{% endblock %}

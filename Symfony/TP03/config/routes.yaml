@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+newIntervenant_success:
+  path:         /newintersuccess
+  controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template:   'intervenant/static/success.html.twig'
+    maxAge:     86400
+    sharedAge:  86400
